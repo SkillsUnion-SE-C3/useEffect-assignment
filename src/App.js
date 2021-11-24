@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 /*
   This is a countdown app. The user can enter a number and start the countdown.
@@ -8,17 +8,28 @@ import { useState } from "react";
   Task: Solve the problem by using `useEffect` hook to stop counting when noOfSeconds is 0.
   
   setInterval documentation: https://www.w3schools.com/jsref/met_win_setinterval.asp
+ }
 */
+
+
 function App() {
   const [noOfSeconds, setNoOfSeconds] = useState(0); // countdown seconds state
   const [intervalId, setIntervalId] = useState(null); // Task 2: Modify this code
 
-  // Task 1: Add code here
+  // Task 1: Add code here 
+
+
+  useEffect(() => {
+      if (noOfSeconds === 0){
+        clearTimeout(intervalId);
+      }
+    }, [noOfSeconds]);
 
   // Called when textfield has onChange event
   function handleChange(e) {
     setNoOfSeconds(parseInt(e.target.value));
   }
+
 
   // Called when "Start Countdown" button is clicked
   function startCountdown() {
